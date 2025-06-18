@@ -1,28 +1,27 @@
 import { useRef } from "react";
 
-const useCustomEffect = (cb: () => unknown, dep?: unknown[]) => {
-  const isFirstRender = useRef(true);
-  const prevDep = useRef<unknown[]>([...(dep || [])]);
+const useCustomEffect = (cb: () => unknown, deps: unknown[]) => {
+  const isFirstRender = useRef(false);
+  const prevDeps = useRef<unknown[]>([]);
 
-  // First time render
-  if (isFirstRender.current) {
-    isFirstRender.current = false;
+  if (!isFirstRender.current) {
+    isFirstRender.current = true;
     cb();
     return;
   }
 
-  // Deps changes and no deps array
-  const isDepsChanged = dep
-    ? JSON.stringify(dep) !== JSON.stringify(prevDep.current)
+  const depsChanged = deps
+    ? JSON.stringify(deps) !== JSON.stringify(prevDeps.current)
     : true;
-  if (isDepsChanged) {
-    const cleanup = cb();
 
-    // Cleanup
-    if (cleanup && typeof cleanup === "function" && dep) {
+  if (depsChanged) {
+    const cleanup = cb();
+    if (cleanup && typeof cleanup === "function" && deps) {
       cleanup();
     }
   }
+
+  prevDeps.current = deps || [];
 };
 
 export default useCustomEffect;
