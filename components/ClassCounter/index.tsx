@@ -1,7 +1,12 @@
 import React from "react";
 
-class ClassCounter extends React.Component {
-  constructor(props) {
+interface ClassCounterState {
+  count: number;
+  count2: number;
+}
+
+class ClassCounter extends React.Component<object, ClassCounterState> {
+  constructor(props: object) {
     console.log("Run : Class Constructor");
     super(props);
 
@@ -23,7 +28,7 @@ class ClassCounter extends React.Component {
     console.log("Run : Class componentDidMount");
   }
 
-  componentDidUpdate(prevProps, prevState): void {
+  componentDidUpdate(prevProps: object, prevState: ClassCounterState): void {
     console.log("Run : Class componentDidUpdate");
 
     if (prevState.count !== this.state.count) {
