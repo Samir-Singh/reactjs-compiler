@@ -4,6 +4,8 @@ import { StoreContext } from "../../src/UseContext";
 const ComponentThree = () => {
   const StoreData = useContext(StoreContext);
 
+  if (!StoreData) return null;
+
   return (
     <div>
       ComponentThree

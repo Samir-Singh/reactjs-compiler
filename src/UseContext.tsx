@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
 import ComponentOne from "../components/ComponentOne";
+import { StoreContextType } from "../types.ts";
 
-export const StoreContext = createContext({});
+export const StoreContext = createContext<StoreContextType | null>(null);
 
 function UseContext() {
   const [count, setCount] = useState(0);
