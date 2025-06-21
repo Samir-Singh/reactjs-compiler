@@ -1,18 +1,16 @@
 import { useContext } from "react";
-import { StoreContext } from "../../src/UseContext";
+import { CountContext } from "../../src/UseContext";
 
 const ComponentThree = () => {
-  const StoreData = useContext(StoreContext);
-
-  if (!StoreData) return null;
+  const CountData = useContext(CountContext);
 
   return (
-    <div>
-      ComponentThree
-      <div>Count : {StoreData.count}</div>
-      <button onClick={() => StoreData.handleIncrement()}>Inc</button>
-      <button onClick={() => StoreData.handleDecrement()}>Dec</button>
-    </div>
+    <>
+      <h3>Component Three</h3>
+      <div>Count : {CountData?.count}</div>
+      <button onClick={() => CountData?.handleIncrement()}>Inc</button>
+      <button onClick={() => CountData?.handleDecrement()}>Dec</button>
+    </>
   );
 };
 
