@@ -1,5 +1,11 @@
 import { ThemeContextType } from "../types";
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type ThemeProviderProps = {
   children: ReactNode;
@@ -23,6 +29,10 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   };
 
   const theme = isDarkMode ? "dark" : "light";
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [isDarkMode]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
