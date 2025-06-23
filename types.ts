@@ -5,6 +5,6 @@ export interface CountContextType {
 }
 
 export interface ThemeContextType {
-  theme: string;
+  theme: "light" | "dark";
   toggleTheme: () => void;
 }

@@ -1,14 +1,13 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../src/UseContext";
 import ComponentThree from "../ComponentThree";
+import { useTheme } from "../../src/theme-context";
 const ComponentTwo = () => {
-  const ThemeData = useContext(ThemeContext);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <>
       <h2>Component Two</h2>
-      <div>Theme: {ThemeData?.theme}</div>
-      <button onClick={() => ThemeData?.toggleTheme()}>Toggle Theme</button>
+      <div>Theme: {theme}</div>
+      <button onClick={() => toggleTheme()}>Toggle Theme</button>
       <ComponentThree />
     </>
   );
