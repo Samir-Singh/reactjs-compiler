@@ -12,13 +12,11 @@ const NavBar = () => {
         <Link to="/blog">Blog</Link>
       </div>
 
-      <label>
-        <input
-          type="checkbox"
-          checked={theme === "dark"}
-          onChange={toggleTheme}
-        />
-      </label>
+      <input
+        type="checkbox"
+        checked={theme === "dark"}
+        onChange={toggleTheme}
+      />
     </div>
   );
 };
