@@ -2,7 +2,7 @@ import { useReducer, useState } from "react";
 
 type TodoType = {
   id: number;
-  value: string;
+  value: string | undefined;
   completed: boolean;
 };
 
@@ -20,7 +20,7 @@ const TodoReducer = () => {
       case "ADD_TODO":
         return [
           ...state,
-          { id: Date.now(), value: action.value ?? "", completed: false },
+          { id: Date.now(), value: action.value, completed: false },
         ];
       case "REMOVE_TODO":
         return state.filter((item) => item.id !== action.id);
