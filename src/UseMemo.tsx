@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-export default function App() {
+const UseMemo = () => {
   const [count, setCount] = useState(0);
   const [count2, setCount2] = useState(0);
 
@@ -13,6 +13,7 @@ export default function App() {
   // };
 
   const multiply = useMemo(() => {
+    // expensive calculation
     let i = 0;
     while (i < 1000000000) {
       i++;
@@ -24,10 +25,12 @@ export default function App() {
     <>
       <p>Count : {count}</p>
       <p>Count2 : {count2}</p>
-      <p>Multiply 5 by Count : {multiply}</p>
+      <p>Multiply Count by 5: {multiply}</p>
 
       <button onClick={() => setCount((prev) => prev + 1)}>Count</button>
       <button onClick={() => setCount2((prev) => prev + 1)}>Count2</button>
     </>
   );
-}
+};
+
+export default UseMemo;
