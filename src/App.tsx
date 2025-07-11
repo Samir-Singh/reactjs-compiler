@@ -1,33 +1,26 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import ChildComponent from "../components/ChildComponent";
+import ChildComponentTwo from "../components/ChildComponentTwo";
 
-export default function App() {
-  const [count, setCount] = useState(0);
-  const [count2, setCount2] = useState(0);
-
-  // const multiply = () => {
-  //   let i = 0;
-  //   while (i < 1000000000) {
-  //     i++;
-  //   }
-  //   return count * 5;
-  // };
-
-  const multiply = useMemo(() => {
-    let i = 0;
-    while (i < 1000000000) {
-      i++;
-    }
-    return count * 5;
-  }, [count]);
+const App = () => {
+  const [showChild, setShowChild] = useState(true);
+  const [showChild2, setShowChild2] = useState(true);
 
   return (
-    <>
-      <p>Count : {count}</p>
-      <p>Count2 : {count2}</p>
-      <p>Multiply 5 by Count : {multiply}</p>
-
-      <button onClick={() => setCount((prev) => prev + 1)}>Count</button>
-      <button onClick={() => setCount2((prev) => prev + 1)}>Count2</button>
-    </>
+    <div>
+      <h1>
+        App.jsx{" "}
+        <button onClick={() => setShowChild((prev) => !prev)}>
+          Toggle Child One
+        </button>
+        <button onClick={() => setShowChild2((prev) => !prev)}>
+          Toggle Child Two
+        </button>
+      </h1>
+      {showChild && <ChildComponent />}
+      {showChild2 && <ChildComponentTwo />}
+    </div>
   );
-}
+};
+
+export default App;

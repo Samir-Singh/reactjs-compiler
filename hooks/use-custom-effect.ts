@@ -1,27 +1,40 @@
 import { useRef } from "react";
 
-const useCustomEffect = (cb: () => unknown, deps: unknown[]) => {
-  const isFirstRender = useRef(false);
-  const prevDeps = useRef<unknown[]>([]);
+const useCustomEffect = (cb: () => unknown, deps?: unknown[] | undefined) => {
+  const useEffectRef = useRef<{
+    isFirstRender: boolean;
+    prevDeps: unknown[] | undefined;
+    cleanup?: (() => void) | null;
+  }>({
+    isFirstRender: false,
+    prevDeps: deps ? deps : [],
+    cleanup: null,
+  });
 
-  if (!isFirstRender.current) {
-    isFirstRender.current = true;
-    cb();
+  const isDepsChanged = deps
+    ? JSON.stringify(deps) !== JSON.stringify(useEffectRef?.current?.prevDeps)
+    : true;
+
+  if (!useEffectRef?.current?.isFirstRender) {
+    useEffectRef.current.isFirstRender = true;
+    const cleanup = cb();
+    if (typeof cleanup === "function") {
+      useEffectRef.current.cleanup = cleanup;
+    }
     return;
   }
 
-  const depsChanged = deps
-    ? JSON.stringify(deps) !== JSON.stringify(prevDeps.current)
-    : true;
-
-  if (depsChanged) {
-    const cleanup = cb();
-    if (cleanup && typeof cleanup === "function" && deps) {
-      cleanup();
+  if (isDepsChanged) {
+    if (useEffectRef?.current?.cleanup) {
+      useEffectRef?.current?.cleanup();
     }
+
+    cb();
   }
 
-  prevDeps.current = deps || [];
+  if (deps) {
+    useEffectRef.current.prevDeps = deps;
+  }
 };
 
 export default useCustomEffect;
