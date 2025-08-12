@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+body {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 20px;
+}
+
+.active-link {
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+}
