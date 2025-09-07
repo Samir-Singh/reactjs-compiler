@@ -1,25 +1,46 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import ChildComponent from "./components/ChildComponent";
+import useCustomEffect from "./hooks/useCustomEffect";
 
 const App = () => {
+  const [show, setShow] = useState(true);
   const [count, setCount] = useState(0);
 
-  const handleIncrement = useCallback(() => {
-    setCount((prev) => prev + 1);
-  }, []);
+  // useEffect(() => {
+  //   console.log("render");
+
+  //   return () => {
+  //     console.log("return");
+  //   };
+  // });
+
+  useCustomEffect(() => {
+    console.log("render");
+
+    return () => {
+      console.log("return");
+    };
+  }, [show]);
 
   return (
-    <>
-      <p>Parent Component</p>
+    <div>
+      <h1>useEffect</h1>
+      <p>Count : {count}</p>
       <button
+        className="border py-1 px-5"
         onClick={() => setCount((prev) => prev + 1)}
-        className="border mt-1 px-2 rounded"
       >
-        Count : {count}
+        Inc
+      </button>
+      <button
+        className="border py-1 px-5"
+        onClick={() => setShow((prev) => !prev)}
+      >
+        Toggle
       </button>
 
-      <ChildComponent handleIncrement={handleIncrement} />
-    </>
+      {show && <ChildComponent />}
+    </div>
   );
 };
 
