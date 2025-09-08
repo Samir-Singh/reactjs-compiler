@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import Counter from "./components/Counter";
-
-const App = () => {
-  return (
-    <div>
-      <Counter />
-=======
 import { useState } from "react";
 import ChildComponent from "./components/ChildComponent";
 import useCustomEffect from "./hooks/useCustomEffect";
@@ -48,7 +40,6 @@ const App = () => {
       </button>
 
       {show && <ChildComponent />}
->>>>>>> cd3655c15f450f4ef066aeb67c6e127d398532c6
     </div>
   );
 };
